@@ -1,0 +1,139 @@
+{
+  "name": "Telegram to LLM Reply",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -32,
+        0
+      ],
+      "id": "feb923a5-0201-4adf-bcbf-091176af80d3",
+      "name": "Telegram Trigger",
+      "webhookId": "38c98f93-745b-4130-ad3f-fbd0df7e7f0e",
+      "credentials": {
+        "telegramApi": {
+          "id": "N2DpkodEwocfQtW9",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "deepseek/deepseek-chat-v3.1",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        176,
+        176
+      ],
+      "id": "bc73149d-f59d-444f-9247-a197259592a3",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "5AmQT5Sc49LeMrmE",
+          "name": "OpenRouter account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "name": "Telegram Send Message",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [
+        528,
+        0
+      ],
+      "id": "f47d9738-f761-45dc-b383-22ef2409c171",
+      "webhookId": "21244a5d-5e48-4cce-bf9e-ead602beed68",
+      "credentials": {
+        "telegramApi": {
+          "id": "N2DpkodEwocfQtW9",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "reply in frindly way."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        176,
+        0
+      ],
+      "id": "1c19148c-72d9-4b38-8b81-7bbee12095d2",
+      "name": "Basic LLM Chain"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Telegram Send Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7991f192-63af-4696-a8ba-524f24403ba9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9e82c88d4c90d47b68faa653fb9fa983aa9c35b9112b0a1f2ad33461c40a6e29"
+  },
+  "id": "PawoQnCDdwnO596c",
+  "tags": []
+}
