@@ -1,0 +1,96 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1w6Xjph3L2CVi-zpORnHE0uz5c9_UUQ75v-QuSv0Jn1Q",
+          "mode": "list",
+          "cachedResultName": "Shafiq's Tasks",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w6Xjph3L2CVi-zpORnHE0uz5c9_UUQ75v-QuSv0Jn1Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "الورقة1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w6Xjph3L2CVi-zpORnHE0uz5c9_UUQ75v-QuSv0Jn1Q/edit#gid=0"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "312d1f32-6aa1-49f5-86ed-9da1a5f59ffa",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "8dNwKkHS1UGOeHgX",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "youssefsaidh123@gmail.com",
+        "subject": "new tasks",
+        "message": "={{ $json.Task }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "792e43d8-e4db-4597-9f22-149ffc5e8a19",
+      "name": "Send a message",
+      "webhookId": "0ccb9ee9-21c3-4a7a-b9bf-df241b754397",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "JajRYi1mgEeZ9mH8",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "93de8023-bb07-4b61-ac28-69d94f98333b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9e82c88d4c90d47b68faa653fb9fa983aa9c35b9112b0a1f2ad33461c40a6e29"
+  },
+  "id": "tRzlCE4nJVDQQTOO",
+  "tags": []
+}
