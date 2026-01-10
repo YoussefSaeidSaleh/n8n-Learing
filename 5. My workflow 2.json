@@ -1,0 +1,67 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "bb65054c-7d4d-44c9-b6db-5df85a6095d5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "http://api.weatherapi.com/v1/current.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "958f9d463d494001a94235552252712"
+            },
+            {
+              "name": "q",
+              "value": "Cairo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "3dfc83a8-798c-4f67-8f9e-f260d5d4fd6d",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6cab8af7-3f9e-4319-98a0-1cce099d6f4e",
+  "meta": {
+    "instanceId": "9e82c88d4c90d47b68faa653fb9fa983aa9c35b9112b0a1f2ad33461c40a6e29"
+  },
+  "id": "UgWcZTLxIQQqdAvl",
+  "tags": []
+}
